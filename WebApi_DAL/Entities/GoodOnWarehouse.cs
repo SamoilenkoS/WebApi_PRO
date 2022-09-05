@@ -14,6 +14,7 @@ namespace WebApi_DAL.Entities
         public Guid GoodId { get; set; }
         [ForeignKey("Warehouse")]
         public Guid WarehouseId { get; set; }
+        [Required]
         public int Count { get; set; }
 
         public Good Good { get; set; }

@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 using WebApi_BL;
+using WebApi_BL.DTOs;
+using WebApi_DAL.Entities;
 
 namespace WebApi_PRO.Controllers
 {
@@ -11,10 +13,14 @@ namespace WebApi_PRO.Controllers
     public class GoodsController : ControllerBase
     {
         private readonly IGoodsService _goodsService;
+        private readonly SomeService _scopedExample;
 
-        public GoodsController(IGoodsService goodsService)
+        public GoodsController(
+            IGoodsService goodsService,
+            SomeService singletonExample)
         {
             _goodsService = goodsService;
+            _scopedExample = singletonExample;
         }
 
         [HttpGet]
@@ -31,6 +37,20 @@ namespace WebApi_PRO.Controllers
             var good = await _goodsService.GetById(id);
 
             return good != null ? Ok(good) : NotFound();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateGood(CreateGoodDto good)
+        {
+            var goodDto = await _goodsService.Create(good);
+
+            return Ok(goodDto);
+        }
+
+        [HttpGet("value")]
+        public string GetValue()
+        {
+            return $"In controller: {_scopedExample.Value} In goods service: {_goodsService.TestGet()}";
         }
     }
 }

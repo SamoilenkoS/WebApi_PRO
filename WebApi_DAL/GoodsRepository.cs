@@ -19,6 +19,7 @@ namespace WebApi_DAL
 
         public async Task<Good> Create(Good good)
         {
+            good.Id = Guid.NewGuid();
             _dbContext.Add(good);
             await _dbContext.SaveChangesAsync();
 

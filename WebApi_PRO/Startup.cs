@@ -24,6 +24,7 @@ namespace WebApi_PRO
         {
             services.AddScoped<IGoodsRepository, GoodsRepository>();
             services.AddScoped<IGoodsService, GoodsService>();
+            services.AddTransient<SomeService>();
             services.AddDbContext<GWContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("Default")));
 

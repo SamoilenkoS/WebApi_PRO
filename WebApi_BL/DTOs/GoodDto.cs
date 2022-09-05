@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace WebApi_DAL.Entities
+namespace WebApi_BL.DTOs
 {
-    public class Good
+    public class GoodDto
     {
-        [Key]
         public Guid Id { get; set; }
         [Required]
         public string Title { get; set; }

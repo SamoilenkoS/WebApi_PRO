@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebApi_DAL.Entities
+namespace WebApi_BL.DTOs
 {
-    public class Warehouse
+    public class CreateGoodDto
     {
-        [Key]
-        public Guid Id { get; set; }
         [Required]
-        public string Address { get; set; }
+        public string Title { get; set; }
+        [Required]
+        public double Price { get; set; }
     }
 }
