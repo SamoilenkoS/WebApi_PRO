@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebApi_BL.DTOs;
-using WebApi_DAL.Entities;
 
 namespace WebApi_BL
 {

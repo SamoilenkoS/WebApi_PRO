@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WebApi_BL
+﻿namespace WebApi_BL
 {
     public class SomeService
     {

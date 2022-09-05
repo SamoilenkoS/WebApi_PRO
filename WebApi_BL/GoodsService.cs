@@ -1,7 +1,6 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebApi_BL.DTOs;
 using WebApi_DAL;
@@ -13,13 +12,16 @@ namespace WebApi_BL
     {
         private readonly IGoodsRepository _goodsRepository;
         private readonly SomeService _scopedExample;
+        private readonly IMapper _mapper;
 
         public GoodsService(
             IGoodsRepository goodsRepository,
-            SomeService scopedExample)
+            SomeService scopedExample,
+            IMapper mapper)
         {
             _goodsRepository = goodsRepository;
             _scopedExample = scopedExample;
+            _mapper = mapper;
         }
 
         public async Task<GoodDto> Create(CreateGoodDto goodDto)
@@ -29,47 +31,16 @@ namespace WebApi_BL
                 throw new ArgumentException("Price should be greater than zero!");
             }
 
-            var good = new Good
-            {
-                CreatedAt = DateTime.Now,
-                Price = goodDto.Price,
-                Title = goodDto.Title
-            };
+            var good = _mapper.Map<Good>(goodDto);
 
             var goodFromDb = await _goodsRepository.Create(good);
 
-            return new GoodDto
-            {
-                Id = goodFromDb.Id,
-                Price = goodFromDb.Price,
-                Title = goodFromDb.Title,
-                CreatedAt = goodFromDb.CreatedAt
-            };
-        }
-
-        public Task<Good> DeleteById(Guid id)
-        {
-            return _goodsRepository.DeleteById(id);
-        }
-
-        public Task<IEnumerable<Good>> GetAll()
-        {
-            return _goodsRepository.GetAll();
-        }
-
-        public Task<Good> GetById(Guid id)
-        {
-            return _goodsRepository.GetById(id);
+            return _mapper.Map<GoodDto>(goodFromDb);
         }
 
         public int TestGet()
         {
             return _scopedExample.Value;
-        }
-
-        public Task<Good> UpdateById(Guid id, Good good)
-        {
-            return _goodsRepository.UpdateById(id, good);
         }
 
         public Task<GoodDto> UpdateById(Guid id, GoodDto good)
@@ -82,9 +53,13 @@ namespace WebApi_BL
             throw new NotImplementedException();
         }
 
-        Task<IEnumerable<GoodDto>> IGoodsService.GetAll()
+        public async Task<IEnumerable<GoodDto>> GetAll()
         {
-            throw new NotImplementedException();
+            var goods = await _goodsRepository.GetAll();
+
+            //_mapper.Map<List<GoodDto>(goods);
+
+            return null;
         }
 
         Task<GoodDto> IGoodsService.GetById(Guid id)
