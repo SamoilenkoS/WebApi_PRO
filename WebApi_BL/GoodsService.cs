@@ -43,9 +43,11 @@ namespace WebApi_BL
             return _scopedExample.Value;
         }
 
-        public Task<GoodDto> UpdateById(Guid id, GoodDto good)
+        public async Task<GoodDto> UpdateById(Guid id, GoodDto good)
         {
-            throw new NotImplementedException();
+            var response = await _goodsRepository.UpdateById(id, _mapper.Map<Good>(good));
+
+            return _mapper.Map<GoodDto>(response);
         }
 
         public Task<GoodDto> DeleteById(Guid id)
