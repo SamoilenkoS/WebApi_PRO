@@ -48,23 +48,21 @@ namespace WebApi_BL
             throw new NotImplementedException();
         }
 
-        Task<GoodDto> IGoodsService.DeleteById(Guid id)
+        public Task<GoodDto> DeleteById(Guid id)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(new GoodDto());
         }
 
         public async Task<IEnumerable<GoodDto>> GetAll()
         {
             var goods = await _goodsRepository.GetAll();
 
-            //_mapper.Map<List<GoodDto>(goods);
-
             return null;
         }
 
-        Task<GoodDto> IGoodsService.GetById(Guid id)
+        public Task<GoodDto> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }
