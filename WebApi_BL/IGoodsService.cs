@@ -12,6 +12,5 @@ namespace WebApi_BL
         Task<GoodDto> DeleteById(Guid id);
         Task<GoodDto> UpdateById(Guid id, GoodDto good);
         Task<GoodDto> Create(CreateGoodDto good);
-        int TestGet();
     }
 }
