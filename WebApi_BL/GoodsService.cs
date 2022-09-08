@@ -57,7 +57,9 @@ namespace WebApi_BL
         {
             var goods = await _goodsRepository.GetAll();
 
-            return null;
+            var response = _mapper.Map<IEnumerable<GoodDto>>(goods);
+
+            return response;
         }
 
         public Task<GoodDto> GetById(Guid id)
