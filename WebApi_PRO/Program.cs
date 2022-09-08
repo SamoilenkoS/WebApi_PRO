@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace WebApi_PRO
 {
@@ -15,6 +16,9 @@ namespace WebApi_PRO
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                })
+            .UseSerilog((context, _, configuration) => configuration
+                .ReadFrom.Configuration(context.Configuration))
+;
     }
 }

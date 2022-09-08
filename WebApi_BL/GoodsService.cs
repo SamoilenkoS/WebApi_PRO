@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using WebApi_BL.DTOs;
 using WebApi_DAL;
@@ -10,15 +12,18 @@ namespace WebApi_BL
 {
     public class GoodsService : IGoodsService
     {
+        private readonly ILogger<GoodsService> _logger;
         private readonly IGoodsRepository _goodsRepository;
         private readonly SomeService _scopedExample;
         private readonly IMapper _mapper;
 
         public GoodsService(
+            ILogger<GoodsService> logger,
             IGoodsRepository goodsRepository,
             SomeService scopedExample,
             IMapper mapper)
         {
+            _logger = logger;
             _goodsRepository = goodsRepository;
             _scopedExample = scopedExample;
             _mapper = mapper;
@@ -57,6 +62,8 @@ namespace WebApi_BL
         {
             var goods = await _goodsRepository.GetAll();
 
+            _logger.LogDebug("Test debug!");
+            _logger.LogInformation($"Got {goods.Count()} items");
             var response = _mapper.Map<IEnumerable<GoodDto>>(goods);
 
             return response;
