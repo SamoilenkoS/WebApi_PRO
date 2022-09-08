@@ -53,7 +53,8 @@ namespace WebApi_PRO.Controllers
         [HttpGet("value/{id}")]
         public string GetValue(int id)
         {
-            return $"In controller: {_scopedExample.Value} In goods service: {_goodsService.TestGet()}";
+            return string.Empty;
+           // return $"In controller: {_scopedExample.Value} In goods service: {_goodsService.TestGet()}";
         }
     }
 }
