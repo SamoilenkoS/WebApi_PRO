@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 using WebApi_BL;
 using WebApi_BL.DTOs;
-using WebApi_DAL.Entities;
 
 namespace WebApi_PRO.Controllers
 {
